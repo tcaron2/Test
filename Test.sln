@@ -25,13 +25,22 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TestForm1", "http://localho
 		DefaultWebSiteLanguage = "Visual Basic"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{DE31CD19-FDED-4243-8358-7EC45FB85FF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9E4D2B4E-C510-4AFC-AEBE-FB0DA7D16E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E4D2B4E-C510-4AFC-AEBE-FB0DA7D16E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E4D2B4E-C510-4AFC-AEBE-FB0DA7D16E84}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E4D2B4E-C510-4AFC-AEBE-FB0DA7D16E84}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{DE31CD19-FDED-4243-8358-7EC45FB85FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE31CD19-FDED-4243-8358-7EC45FB85FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE31CD19-FDED-4243-8358-7EC45FB85FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE31CD19-FDED-4243-8358-7EC45FB85FF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
