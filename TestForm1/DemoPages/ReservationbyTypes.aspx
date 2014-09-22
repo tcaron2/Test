@@ -1,9 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ReservationbyTypes.aspx.cs" Inherits="DemoPages_ReservationbyTypes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
-    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="ObjectDataSource1" DataTextField="Description" DataValueField="EventCode"></asp:DropDownList>
+    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="ObjectDataSource1" DataTextField="Description" DataValueField="EventCode" AppendDataBoundItems="True">
+        <asp:ListItem Value="
+            ">Select Event</asp:ListItem>
+    </asp:DropDownList>
+    <asp:Button ID="Button1" runat="server" Text="Refresh Reservation List" />
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="SpecialEvent_List" TypeName="eRestaurantSystem.BLL.eRestaurantController"></asp:ObjectDataSource>
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="ObjectDataSource2" PageSize="5">
+    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="ObjectDataSource3" PageSize="5">
         <AlternatingRowStyle BackColor="#CCCCFF" />
         <Columns>
             <asp:BoundField DataField="ReservationID" HeaderText="ID" ReadOnly="True" 
@@ -34,6 +38,9 @@
             <asp:BoundField DataField="ReservationStatus" HeaderText="ReservationStatus" SortExpression="ReservationStatus" />
             <asp:BoundField DataField="Eventcode" HeaderText="Eventcode" SortExpression="Eventcode" />
         </Columns>
+        <EmptyDataTemplate>
+            No data available at this time
+        </EmptyDataTemplate>
         <PagerSettings FirstPageText="First" LastPageText="Last" Mode="NumericFirstLast" NextPageText="Next" PageButtonCount="6" PreviousPageText="Back" />
     </asp:GridView>
     <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Reservation_List" TypeName="eRestaurantSystem.BLL.eRestaurantController"></asp:ObjectDataSource>
@@ -48,4 +55,9 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="ReservationbyEvent" TypeName="eRestaurantSystem.BLL.eRestaurantController">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="DropDownList1" Name="eventcode" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
 </asp:Content>
