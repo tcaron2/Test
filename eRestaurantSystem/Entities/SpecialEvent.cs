@@ -11,7 +11,7 @@ namespace eRestaurantSystem.Entities
     public class SpecialEvent
     {
         [Key]
-        public char EventCode { get; set; }
+        public string EventCode { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
     }
