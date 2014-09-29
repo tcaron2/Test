@@ -95,6 +95,51 @@ namespace eRestaurantSystem.BLL
             }
         }
 
+        //Get one by primary Key
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public SpecialEvent SpecialEventByEventCode(string eventcode)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                return context.SpecialEvents.Find(eventcode);
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
+        public void SpecialEvents_Add(SpecialEvent item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                SpecialEvent added = null;
+                added = context.SpecialEvents.Add(item);
+                // commits the add to the database
+                // Evaluate the annotations (validations) on your entity
+                // [Required], [StringLength], [Range], ect...
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public void SpecialEvents_Update(SpecialEvent item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                context.Entry<SpecialEvent>(context.SpecialEvents.Attach(item)).State
+                    = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
+        public void SpecialEvents_Delete(SpecialEvent item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                SpecialEvent exsisting = context.SpecialEvents.Find(item.EventCode);
+                context.SpecialEvents.Remove(exsisting);
+                context.SaveChanges();
+            }
+        }
         #endregion
 
         #region Waiter
