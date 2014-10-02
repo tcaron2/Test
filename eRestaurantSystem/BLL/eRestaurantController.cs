@@ -89,7 +89,7 @@ namespace eRestaurantSystem.BLL
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Reservation> ReservationbyEvent(string eventcode)
         {
-            using (eRestaurantContext context= new eRestaurantContext())
+            using (eRestaurantContext context = new eRestaurantContext())
             {
                 return context.Reservations.Where(anItem => anItem.Eventcode == eventcode).ToList();
             }
@@ -97,21 +97,21 @@ namespace eRestaurantSystem.BLL
 
         //Get one by primary Key
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public SpecialEvent SpecialEventByEventCode(string eventcode)
+        public Reservation ReservationsByReservationID(string reservationid)
         {
             using (eRestaurantContext context = new eRestaurantContext())
             {
-                return context.SpecialEvents.Find(eventcode);
+                return context.Reservations.Find(reservationid);
             }
         }
 
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void SpecialEvents_Add(SpecialEvent item)
+        public void Reservation_Add(Reservation item)
         {
             using (eRestaurantContext context = new eRestaurantContext())
             {
-                SpecialEvent added = null;
-                added = context.SpecialEvents.Add(item);
+                Reservation added = null;
+                added = context.Reservations.Add(item);
                 // commits the add to the database
                 // Evaluate the annotations (validations) on your entity
                 // [Required], [StringLength], [Range], ect...
@@ -120,23 +120,23 @@ namespace eRestaurantSystem.BLL
         }
 
         [DataObjectMethod(DataObjectMethodType.Update, false)]
-        public void SpecialEvents_Update(SpecialEvent item)
+        public void Reservations_Update(Reservation item)
         {
             using (eRestaurantContext context = new eRestaurantContext())
             {
-                context.Entry<SpecialEvent>(context.SpecialEvents.Attach(item)).State
+                context.Entry<Reservation>(context.Reservations.Attach(item)).State
                     = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
         }
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public void SpecialEvents_Delete(SpecialEvent item)
+        public void Reservations_Delete(Reservation item)
         {
             using (eRestaurantContext context = new eRestaurantContext())
             {
-                SpecialEvent exsisting = context.SpecialEvents.Find(item.EventCode);
-                context.SpecialEvents.Remove(exsisting);
+                Reservation exsisting = context.Reservations.Find(item.ReservationID);
+                context.Reservations.Remove(exsisting);
                 context.SaveChanges();
             }
         }

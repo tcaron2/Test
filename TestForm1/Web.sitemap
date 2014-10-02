@@ -18,5 +18,9 @@
       <siteMapNode url="~/Admin/ManageMenuItems.aspx" title="Items"  description="Manage the Menu" />
       <siteMapNode url="~/Admin/ManageWaiters.aspx" title="Waiters"  description="Staff Management" />
     </siteMapNode>
+    <siteMapNode title="Demos"  description="Class Demos">
+      <siteMapNode url="~/DemoPages/ReservationbyTypes.aspx" title="Reservation by Types"  description="Reservation by Types" />
+      <siteMapNode url="~/DemoPages/ListViewSpecialEventsCRUD.aspx" title="ListView Special Events"  description="ListViewSpecialEventsCRUD" />
+    </siteMapNode>
   </siteMapNode>
 </siteMap>
