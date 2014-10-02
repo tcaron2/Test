@@ -24,7 +24,12 @@ namespace eRestaurantSystem.BLL
             //interfacing with our Context class
             using (eRestaurantContext context = new eRestaurantContext())
             {
-                return context.SpecialEvents.ToList();
+                //Using context DBset to get entity data
+                //return context.SpecialEvents.ToList();
+
+                //get a list of instances for entity using LINQ
+                var results = from item in context.SpecialEvents select item;
+                return results.ToList();
             }
         }
 

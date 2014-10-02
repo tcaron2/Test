@@ -27,5 +27,6 @@ namespace eRestaurantSystem.Entities
 
         //navigation
         public virtual Waiter Waiter { get; set; }
+
     }
 }
