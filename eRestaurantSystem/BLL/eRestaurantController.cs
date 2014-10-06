@@ -288,7 +288,8 @@ namespace eRestaurantSystem.BLL
                                               }
                               };
 
-                results.Dump();
+                return results.ToList();
+                //This was .Dump() in Linqpad
             }
         }
         #endregion

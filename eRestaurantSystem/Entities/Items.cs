@@ -24,5 +24,8 @@ namespace eRestaurantSystem.Entities
         public string Comment { get; set; }
         [Required(ErrorMessage = "MenuCategoryID is required.")]
         public int MenuCategoryID { get; set; }
+
+        //navigation
+        public virtual MenuCategories MenuCategories { get; set; }
     }
 }

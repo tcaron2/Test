@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eRestaurantSystem.Entities
 {
-    class MenuCategories
+    public class MenuCategories
     {
         [Key]
         public int MenuCategoryID { get; set; }
