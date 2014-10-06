@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using eRestaurantSystem.Entities;
 using eRestaurantSystem.DAL;
 using System.ComponentModel;
+using eRestaurantSystem.POCOs;
 #endregion
 
 namespace eRestaurantSystem.BLL
@@ -147,7 +148,7 @@ namespace eRestaurantSystem.BLL
         }
         #endregion
 
-        #region Waiter
+        #region Waiters
 
         //Get all in a list
         [DataObjectMethod(DataObjectMethodType.Select, false)]
@@ -203,6 +204,91 @@ namespace eRestaurantSystem.BLL
                 Waiter exsisting = context.Waiters.Find(item.WaiterID);
                 context.Waiters.Remove(exsisting);
                 context.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region Bills
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<Bill> Bill_List()
+        {
+            //interfacing with our Context class
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                return context.Bills.ToList();
+            }
+        }
+
+        //Get one by primary Key
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public Bill BillByBillID(string billid)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                return context.Bills.Find(billid);
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
+        public void Bills_Add(Bill item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                Bill added = null;
+                added = context.Bills.Add(item);
+                // commits the add to the database
+                // Evaluate the annotations (validations) on your entity
+                // [Required], [StringLength], [Range], ect...
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public void Bills_Update(Bill item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                context.Entry<Bill>(context.Bills.Attach(item)).State
+                    = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
+        public void Bills_Delete(Bill item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                Bill exsisting = context.Bills.Find(item.BillID);
+                context.Bills.Remove(exsisting);
+                context.SaveChanges();
+            }
+        }
+        #endregion 
+
+        #region Linq Queries
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        public List<CategoryMenuItems> GetCategoryMenuItems()
+        {
+            using(eRestaurantContext context = new eRestaurantContext())
+            {
+                var results = from cat in context.MenuCategories
+                              orderby cat.Description
+                              select new CategoryMenuItems()
+                              {
+                                  Description = cat.Description,
+                                  MenuItems = from item in cat.Items
+                                              where item.Active
+                                              select new MenuItem()
+                                              {
+                                                  Description = item.Description,
+                                                  Price = item.CurrentPrice,
+                                                  Calories = item.Calories,
+                                                  Comment = item.Comment
+                                              }
+                              };
+
+                results.Dump();
             }
         }
         #endregion
